@@ -1,0 +1,16 @@
+import java.util.Random;
+
+public class pd_frenemy implements IFunction 
+{
+
+	@Override
+	public int function(double[][] payoff, int[][] moveHistory) {
+		// TODO Auto-generated method stub
+		Random randomGenerator = new Random();
+		double val = randomGenerator.nextDouble();
+		if(val < 0.4)
+			return 0;
+		else
+			return 1;		
+	}
+}
