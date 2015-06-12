@@ -1,0 +1,29 @@
+
+public class pd_optimist implements IFunction 
+{
+
+	@Override
+	public int function(double[][] payoff, int[][] moveHistory) {
+		double total = moveHistory[0][0] + moveHistory[0][1] + moveHistory[1][0] + moveHistory[1][1];
+		double P_exp_c = payoff[0][0]*((moveHistory[0][0] + moveHistory[0][1])/total)
+				+ payoff[1][0]*((moveHistory[1][0] + moveHistory[1][1])/total);
+				
+		double P_exp_d = payoff[0][1]*((moveHistory[0][0] + moveHistory[0][1])/total)
+				+ payoff[1][1]*((moveHistory[1][0] + moveHistory[1][1])/total);
+			
+		if (P_exp_c > P_exp_d)
+			return 0;
+		else if(P_exp_c < P_exp_d)
+			return 1;
+		else if(payoff[0][1] > payoff[1][0])
+			return 1;
+		else if(payoff[0][1] < payoff[1][0])
+			return 0;
+		else
+		{
+			pd_Random rand = new pd_Random();
+			return rand.function(payoff, moveHistory);
+		}		
+	}
+
+}
